@@ -9,7 +9,7 @@ jobs:
   docker:
     uses: clouddrove/github-shared-workflows/.github/workflows/docker-build-push.yml@v2
     with:
-      registry: Dockerhub
+      provider: DOCKERHUB
       images: rishikkk/my-app
       IMAGE_TAG: v1
     secrets:
