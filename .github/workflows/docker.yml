@@ -6,13 +6,12 @@ on:
       - main
 
 jobs:
-
-    docker-push:
+  docker:
     uses: clouddrove/github-shared-workflows/.github/workflows/docker-build-push.yml@v2
-    secrets:
-      DOCKERHUB_USERNAME: # Dockerhub username
-      DOCKERHUB_PASSWORD: # Dockerhub password
     with:
       registry: Dockerhub
       images: rishikkk/my-app
       IMAGE_TAG: v1
+    secrets:
+      DOCKERHUB_USERNAME: # Dockerhub username
+      DOCKERHUB_PASSWORD: # Dockerhub password
