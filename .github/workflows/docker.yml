@@ -10,10 +10,9 @@ jobs:
     uses: clouddrove/github-shared-workflows/.github/workflows/docker-build-push.yml@master
 
     with:
-      image_name: rishikkk/my-nginx-app
-      dockerfile: ./docker/Dockerfile
-      context: .
-      push: true
-      tags: latest
+      IMAGE_NAME: YOUR_DOCKER_USERNAME/my-nginx-app
+      IMAGE_TAG: latest
+      DOCKERFILE_PATH: ./docker/Dockerfile
+      CONTEXT: .
 
     secrets: inherit
