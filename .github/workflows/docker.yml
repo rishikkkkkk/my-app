@@ -1,0 +1,19 @@
+name: Docker Build & Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker:
+    uses: clouddrove/github-shared-workflows/.github/workflows/docker-build-push.yml@master
+
+    with:
+      image_name: rishikkk/my-nginx-app
+      dockerfile: ./docker/Dockerfile
+      context: .
+      push: true
+      tags: latest
+
+    secrets: inherit
