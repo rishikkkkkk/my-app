@@ -6,13 +6,18 @@ on:
       - main
 
 jobs:
-  docker:
-    uses: clouddrove/github-shared-workflows/.github/workflows/docker-build-push.yml@master
+    docker-scanner:
+    uses: clouddrove/github-shared-workflows/.github/workflows/docker-scanner.yml@v2
 
+
+    docker-push:
+    needs: docker-scanner  
+    if: ${{ success() && needs.docker-scanner.result == 'success' }}   # This condition start this docker push workflow on succesfull scanning of docker image
+    uses: clouddrove/github-shared-workflows/.github/workflows/docker-build-push.yml@v2
+    secrets:
+      DOCKERHUB_USERNAME: # Dockerhub username
+      DOCKERHUB_PASSWORD: # Dockerhub password
     with:
-      IMAGE_NAME: rishikkk/my-nginx-app
-      IMAGE_TAG: latest
-      DOCKERFILE_PATH: ./docker/Dockerfile
-      CONTEXT: .
-
-    secrets: inherit
+      registry: Dockerhub
+      images: rishikkk/my-app
+      IMAGE_TAG: v1
